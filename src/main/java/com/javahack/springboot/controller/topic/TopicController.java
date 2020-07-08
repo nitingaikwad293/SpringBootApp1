@@ -1,8 +1,9 @@
 package com.javahack.springboot.controller.topic;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,19 +12,18 @@ import com.javahack.springboot.model.Topic;
 @RestController
 public class TopicController {
 	
+	@Autowired
+	private TopicService topicService;
 	
-	@RequestMapping("/topic")
+	
+	@RequestMapping("/topices")
 	public List<Topic> getAllTopic(){
-		
-		
-		List<Topic> topices = new ArrayList<Topic>();
-		
-		topices.add(new Topic("T101", "Java"));
-		topices.add(new Topic("T102", "Spring"));
-		
-		return topices;
-		
+		return 	topicService.getAllTopic();
 	}
 	
+	@RequestMapping("/topices/{id}")
+	public Topic getTopic(@PathVariable String id) {
+		return topicService.getTopic(id);
+	}
 
 }
