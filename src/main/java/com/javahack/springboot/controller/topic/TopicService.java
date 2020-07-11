@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javahack.springboot.model.Topic;
@@ -11,25 +12,25 @@ import com.javahack.springboot.model.Topic;
 @Service
 public class TopicService {
 	
+	@Autowired
+	TopicRepository topicRepository;
 	
-	private static List<Topic> topices = new ArrayList<Topic> (Arrays.asList(
-			new Topic("T101", "Java"),
-			new Topic("T102", "Spring"),
-			new Topic("T102", "Maths")
-			));
-	
+	List<Topic> topices = new ArrayList<>();
 	
 	public List<Topic> getAllTopic(){
-		return topices;
+		List<Topic> topics = new ArrayList<Topic>();
+		topicRepository.findAll().forEach(topics::add);
+		return topics;
 	}
 	
 	public Topic getTopic(String id) {
 		
-		return topices.stream().filter(t -> t.getId().equals(id)).findFirst().get();
+		return new Topic();
 	}
 
 	public void addTopic(Topic topic) {
-		topices.add(topic);
+		topicRepository.save(topic);
+//		topices.add(topic);
 		
 	}
 

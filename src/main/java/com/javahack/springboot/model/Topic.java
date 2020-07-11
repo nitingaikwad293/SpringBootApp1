@@ -1,18 +1,26 @@
 package com.javahack.springboot.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Topic {
 	
-	
+	@Id
 	private String id;
 	private String name;
 	
 	
+	public Topic() {
+		
+	}
 	
 	public Topic(String id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
+	
 	
 	
 	public String getId() {
